@@ -11,6 +11,9 @@ lang: zh-CN
 # Change to your timezone › https://zones.arilyn.cc
 timezone: Asia/Shanghai
 
+# Allow posts dated in the future (e.g. articles written today) to be published immediately.
+future: true
+
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
