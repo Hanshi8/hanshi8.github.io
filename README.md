@@ -5,10 +5,12 @@
 ## 在线写文章（推荐，无需代码）
 
 1. 打开 <https://hanshi8.github.io/admin>
-2. 点击「登录 GitHub」并授权
+2. 点击「Login with Turbo」并用 Decap Turbo 账号（mr.jiki@qq.com）登录
 3. 在「文章」中新建或编辑文章，保存并发布
 
 发布后 1～2 分钟，站点会自动重新构建并上线新内容。
+
+> 后台认证由 Decap Turbo（免费层）托管，无需自建 OAuth 服务。
 
 ## 本地开发（可选）
 
