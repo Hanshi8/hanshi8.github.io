@@ -1,0 +1,64 @@
+<!-- Homepage visit stats (only on the home layout) -->
+{% if page.layout == 'home' %}
+<div id="site-stats" style="max-width: 62.5rem; margin: 2rem auto 0; padding: 0 1rem; width: 100%;">
+  <hr class="mb-2" />
+  <div
+    class="d-flex justify-content-between align-items-center mb-2"
+    style="font-size: 0.95rem; font-weight: 600;"
+  >
+    <span>访问统计</span>
+    <span style="font-size: 0.75rem; font-weight: 400; opacity: 0.6;">由 Umami 提供 · 含总访问量</span>
+  </div>
+  <iframe
+    src="https://cloud.umami.is/analytics/eu/share/zQEcudM7nlym0l6b"
+    style="width: 100%; height: 480px; border: 1px solid rgba(128, 128, 128, 0.25); border-radius: 8px; background: #fff;"
+    loading="lazy"
+    referrerpolicy="no-referrer"
+    title="访问统计看板"
+  ></iframe>
+</div>
+{% endif %}
+
+<!-- The Footer -->
+<footer
+  aria-label="Site Info"
+  class="
+    d-flex flex-column justify-content-center text-muted
+    flex-lg-row justify-content-lg-between align-items-lg-center pb-lg-3
+  "
+>
+  <p>
+    {{- '©' }}
+    <time>{{ 'now' | date: '%Y' }}</time>
+    {% if site.social.links %}
+      <a href="{{ site.social.links[0] }}">{{ site.social.name }}</a>.
+    {% else %}
+      <em class="fst-normal">{{ site.social.name }}</em>.
+    {% endif %}
+    {% if site.data.locales[include.lang].copyright.brief %}
+      <span
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+        title="{{ site.data.locales[include.lang].copyright.verbose }}"
+      >
+        {{- site.data.locales[include.lang].copyright.brief -}}
+      </span>
+    {% endif %}
+  </p>
+  <p>
+    {%- capture _platform -%}
+      <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a>
+    {%- endcapture -%}
+    {%- capture _theme -%}
+      <a
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+        title="v{{ theme.version }}"
+        href="https://github.com/cotes2020/jekyll-theme-chirpy"
+        target="_blank"
+        rel="noopener"
+      >Chirpy</a>
+    {%- endcapture -%}
+    {{ site.data.locales[include.lang].meta | replace: ':PLATFORM', _platform | replace: ':THEME', _theme }}
+  </p>
+</footer>

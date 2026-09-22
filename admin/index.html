@@ -6,9 +6,134 @@
   <title>Content Manager</title>
   <!-- Include the styles for the CMS -->
   <link href="https://cdn.jsdelivr.net/npm/decap-cms@beta/dist/decap-cms.css" rel="stylesheet" />
+  <style>
+    #umami-btn {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 2147483647;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 16px;
+      border: none;
+      border-radius: 999px;
+      background: #2563eb;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    #umami-btn:hover { background: #1d4ed8; }
+    #umami-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 2147483646;
+      background: rgba(15, 23, 42, 0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    #umami-overlay.open { display: flex; }
+    #umami-box {
+      width: 100%;
+      max-width: 1100px;
+      height: 92vh;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+    #umami-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+      border-bottom: 1px solid #e5e7eb;
+      font-weight: 600;
+      font-size: 15px;
+      color: #111827;
+    }
+    #umami-close {
+      border: none;
+      background: #f3f4f6;
+      color: #374151;
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      line-height: 1;
+    }
+    #umami-close:hover { background: #e5e7eb; }
+    #umami-frame {
+      flex: 1;
+      border: none;
+      width: 100%;
+      background: #fff;
+    }
+    #umami-btn .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4ade80;
+      display: inline-block;
+    }
+  </style>
 </head>
 <body>
   <!-- Include the script that builds the page and powers Decap CMS -->
   <script src="https://cdn.jsdelivr.net/npm/decap-cms@beta/dist/decap-cms.js"></script>
+
+  <!-- Umami statistics viewer -->
+  <button id="umami-btn" type="button"><span class="dot"></span>访问统计</button>
+  <div id="umami-overlay" role="dialog" aria-modal="true" aria-label="访问统计">
+    <div id="umami-box">
+      <div id="umami-head">
+        <span>访问统计 · Umami</span>
+        <button id="umami-close" type="button" aria-label="关闭">&#10005;</button>
+      </div>
+      <iframe
+        id="umami-frame"
+        src="https://cloud.umami.is/analytics/eu/share/zQEcudM7nlym0l6b"
+        title="Umami 访问统计看板"
+        referrerpolicy="no-referrer"
+        loading="lazy"
+      ></iframe>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var btn = document.getElementById('umami-btn');
+      var overlay = document.getElementById('umami-overlay');
+      var close = document.getElementById('umami-close');
+      var frame = document.getElementById('umami-frame');
+      btn.addEventListener('click', function () {
+        overlay.classList.add('open');
+        var src = frame.src;
+        frame.src = '';
+        frame.src = src;
+      });
+      close.addEventListener('click', function () {
+        overlay.classList.remove('open');
+      });
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) {
+          overlay.classList.remove('open');
+        }
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          overlay.classList.remove('open');
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
