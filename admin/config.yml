@@ -31,3 +31,16 @@ collections:
       - { label: "置顶", name: "pin", widget: "boolean", default: false, required: false }
       - { label: "显示目录", name: "toc", widget: "boolean", default: true, required: false }
       - { label: "正文", name: "body", widget: "markdown" }
+
+  - name: "files"
+    label: "仓库"
+    label_singular: "文件"
+    folder: "files"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - { label: "标题", name: "title", widget: "string" }
+      - { label: "正文", name: "body", widget: "markdown" }
