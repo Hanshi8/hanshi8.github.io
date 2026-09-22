@@ -2,8 +2,8 @@
 # 访问 https://hanshi8.github.io/admin 即可在网页上管理文章
 
 backend:
-  name: github
-  repo: Hanshi8/hanshi8.github.io
+  name: turbo-github
+  turbo_site_id: d38cb93a-65b7-4a7b-8d01-5618f323a5d6
   branch: main
 
 # 图片等媒体文件的上传位置
