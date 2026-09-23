@@ -3,136 +3,117 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Content Manager</title>
+  <title>内容管理</title>
   <!-- Include the styles for the CMS -->
   <link href="https://cdn.jsdelivr.net/npm/decap-cms@beta/dist/decap-cms.css" rel="stylesheet" />
   <style>
-    #umami-btn {
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background: #f8fafc; }
+    /* Top navigation */
+    #dash-nav {
       position: fixed;
-      right: 20px;
-      bottom: 20px;
+      top: 0; left: 0; right: 0;
+      height: 52px;
       z-index: 2147483647;
-      display: inline-flex;
+      background: #0f172a;
+      display: flex;
       align-items: center;
-      gap: 6px;
-      padding: 9px 16px;
-      border: none;
-      border-radius: 999px;
-      background: #2563eb;
+      padding: 0 16px;
+      gap: 4px;
+      box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+    }
+    #dash-nav .brand {
       color: #fff;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    }
-    #umami-btn:hover { background: #1d4ed8; }
-    #umami-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 2147483646;
-      background: rgba(15, 23, 42, 0.55);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    }
-    #umami-overlay.open { display: flex; }
-    #umami-box {
-      width: 100%;
-      max-width: 1100px;
-      height: 92vh;
-      background: #fff;
-      border-radius: 12px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    }
-    #umami-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 16px;
-      border-bottom: 1px solid #e5e7eb;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 15px;
-      color: #111827;
+      margin-right: 18px;
+      white-space: nowrap;
     }
-    #umami-close {
+    #dash-nav .brand em { color: #60a5fa; font-style: normal; }
+    #dash-nav button {
+      background: transparent;
       border: none;
-      background: #f3f4f6;
-      color: #374151;
-      width: 30px;
-      height: 30px;
+      color: #94a3b8;
+      padding: 8px 16px;
       border-radius: 6px;
-      font-size: 16px;
       cursor: pointer;
-      line-height: 1;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background 0.15s, color 0.15s;
     }
-    #umami-close:hover { background: #e5e7eb; }
-    #umami-frame {
-      flex: 1;
-      border: none;
-      width: 100%;
+    #dash-nav button:hover { color: #fff; background: rgba(255, 255, 255, 0.08); }
+    #dash-nav button.active { background: #2563eb; color: #fff; }
+    /* Decap CMS container (created by decap-cms.js) */
+    #nc-root {
+      position: fixed;
+      top: 52px; left: 0; right: 0; bottom: 0;
+      overflow: hidden;
+      z-index: 10;
+    }
+    /* Other tabs */
+    .dash-tab {
+      display: none;
+      position: fixed;
+      top: 52px; left: 0; right: 0; bottom: 0;
+      z-index: 10;
       background: #fff;
     }
-    #umami-btn .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #4ade80;
-      display: inline-block;
-    }
+    .dash-tab.active { display: block; }
+    .dash-tab iframe { width: 100%; height: 100%; border: none; }
   </style>
 </head>
 <body>
+  <nav id="dash-nav">
+    <span class="brand">寒食 <em>·</em> 管理</span>
+    <button id="tab-cms" type="button" class="active">内容管理</button>
+    <button id="tab-repo" type="button">仓库</button>
+    <button id="tab-stats" type="button">统计</button>
+  </nav>
+
+  <!-- Decap CMS renders into #nc-root -->
+  <div id="nc-root"></div>
+
+  <div id="tab-repo-panel" class="dash-tab">
+    <iframe src="/repository/" title="仓库文件" referrerpolicy="no-referrer"></iframe>
+  </div>
+  <div id="tab-stats-panel" class="dash-tab">
+    <iframe src="https://cloud.umami.is/analytics/eu/share/zQEcudM7nlym0l6b" title="访问统计" referrerpolicy="no-referrer" loading="lazy"></iframe>
+  </div>
+
   <!-- Include the script that builds the page and powers Decap CMS -->
   <script src="https://cdn.jsdelivr.net/npm/decap-cms@beta/dist/decap-cms.js"></script>
 
-  <!-- Umami statistics viewer -->
-  <button id="umami-btn" type="button"><span class="dot"></span>访问统计</button>
-  <div id="umami-overlay" role="dialog" aria-modal="true" aria-label="访问统计">
-    <div id="umami-box">
-      <div id="umami-head">
-        <span>访问统计 · Umami</span>
-        <button id="umami-close" type="button" aria-label="关闭">&#10005;</button>
-      </div>
-      <iframe
-        id="umami-frame"
-        src="https://cloud.umami.is/analytics/eu/share/zQEcudM7nlym0l6b"
-        title="Umami 访问统计看板"
-        referrerpolicy="no-referrer"
-        loading="lazy"
-      ></iframe>
-    </div>
-  </div>
   <script>
     (function () {
-      var btn = document.getElementById('umami-btn');
-      var overlay = document.getElementById('umami-overlay');
-      var close = document.getElementById('umami-close');
-      var frame = document.getElementById('umami-frame');
-      btn.addEventListener('click', function () {
-        overlay.classList.add('open');
-        var src = frame.src;
-        frame.src = '';
-        frame.src = src;
-      });
-      close.addEventListener('click', function () {
-        overlay.classList.remove('open');
-      });
-      overlay.addEventListener('click', function (e) {
-        if (e.target === overlay) {
-          overlay.classList.remove('open');
+      var cmsBtn = document.getElementById('tab-cms');
+      var repoBtn = document.getElementById('tab-repo');
+      var statsBtn = document.getElementById('tab-stats');
+      var ncRoot = document.getElementById('nc-root');
+      var repoPanel = document.getElementById('tab-repo-panel');
+      var statsPanel = document.getElementById('tab-stats-panel');
+
+      function showTab(which) {
+        cmsBtn.classList.toggle('active', which === 'cms');
+        repoBtn.classList.toggle('active', which === 'repo');
+        statsBtn.classList.toggle('active', which === 'stats');
+        ncRoot.style.display = which === 'cms' ? 'block' : 'none';
+        repoPanel.classList.toggle('active', which === 'repo');
+        statsPanel.classList.toggle('active', which === 'stats');
+        if (which === 'repo') {
+          var f = repoPanel.querySelector('iframe');
+          var src = f.getAttribute('src');
+          f.src = src; // reload to refresh the file list
         }
-      });
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') {
-          overlay.classList.remove('open');
+        if (which === 'stats') {
+          var fs = statsPanel.querySelector('iframe');
+          var srcs = fs.getAttribute('src');
+          fs.src = srcs; // reload to refresh stats
         }
-      });
+      }
+
+      cmsBtn.addEventListener('click', function () { showTab('cms'); });
+      repoBtn.addEventListener('click', function () { showTab('repo'); });
+      statsBtn.addEventListener('click', function () { showTab('stats'); });
     })();
   </script>
 </body>
