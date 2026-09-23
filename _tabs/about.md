@@ -11,8 +11,6 @@ order: 4
 > 江湖夜雨十年灯。
 {: .prompt-tip }
 
-## 关于这个站点
+## 访问统计
 
-- 由 [Chirpy](https://github.com/cotes2020/jekyll-theme-chirpy) 主题驱动，托管在 GitHub Pages 上
-- 文章通过 Decap CMS 在浏览器里直接撰写与发布
-如果你有任何想法想交流，欢迎在 GitHub 上找到我。
+<iframe src="https://cloud.umami.is/analytics/eu/share/zQEcudM7nlym0l6b" style="width:100%; height:480px; border:1px solid rgba(128,128,128,0.25); border-radius:8px; background:#fff;" loading="lazy" referrerpolicy="no-referrer" title="访问统计看板"></iframe>
