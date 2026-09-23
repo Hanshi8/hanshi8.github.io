@@ -15,6 +15,4 @@ order: 4
 
 - 由 [Chirpy](https://github.com/cotes2020/jekyll-theme-chirpy) 主题驱动，托管在 GitHub Pages 上
 - 文章通过 Decap CMS 在浏览器里直接撰写与发布
-- 访问 `https://hanshi8.github.io/admin` 可以登录后台写文章
-
 如果你有任何想法想交流，欢迎在 GitHub 上找到我。
