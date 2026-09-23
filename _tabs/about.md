@@ -10,7 +10,3 @@ order: 4
 
 > 江湖夜雨十年灯。
 {: .prompt-tip }
-
-## 访问统计
-
-<iframe src="https://cloud.umami.is/analytics/eu/share/zQEcudM7nlym0l6b" style="width:100%; height:480px; border:1px solid rgba(128,128,128,0.25); border-radius:8px; background:#fff;" loading="lazy" referrerpolicy="no-referrer" title="访问统计看板"></iframe>
